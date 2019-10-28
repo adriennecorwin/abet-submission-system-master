@@ -1,0 +1,46 @@
+body {
+  text-align: center;
+  font: 16px "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif; }
+
+a {
+  color: #00B7FF;
+  text-decoration: none; }
+
+.exceeds {
+  background-color: rgb(127, 186, 253);
+}
+
+.meets {
+  background-color: rgb(155, 226, 155);
+}
+
+.partially {
+  background-color: yellow;
+}
+
+.not {
+  background-color: rgb(255, 160, 160);
+}
+
+.does-not-apply {
+  background-color: white;
+}
+
+.material-icons {
+  vertical-align: middle;
+  font-size: inherit !important; }
+
+#course_index_page {
+  text-align: left; 
+}
+
+#course_index_page table {
+  width: 100%;
+  text-align: center; 
+}
+
+#course_index_page table tr:first-child {
+  border-bottom: 1px solid black; 
+}
+
+/*# sourceMappingURL=style.css.map */
