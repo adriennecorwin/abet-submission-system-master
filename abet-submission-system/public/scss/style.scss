@@ -8,6 +8,26 @@ a {
 	text-decoration: none;
 }
 
+.exceeds {
+	background-color: rgb(139, 185, 255);
+  }
+  
+  .meets {
+	background-color: rgb(152, 226, 152);
+  }
+  
+  .partially {
+	background-color: rgb(253, 253, 160);
+  }
+  
+  .not {
+	background-color: rgb(255, 147, 147);
+  }
+  
+  .does-not-apply {
+	background-color: white;
+  }
+
 .material-icons {
 	vertical-align: middle;
 	font-size: inherit !important;

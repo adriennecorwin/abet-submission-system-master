@@ -7,40 +7,30 @@ a {
   text-decoration: none; }
 
 .exceeds {
-  background-color: rgb(127, 186, 253);
-}
+  background-color: #8bb9ff; }
 
 .meets {
-  background-color: rgb(155, 226, 155);
-}
+  background-color: #98e298; }
 
 .partially {
-  background-color: yellow;
-}
+  background-color: #fdfda0; }
 
 .not {
-  background-color: rgb(255, 160, 160);
-}
+  background-color: #ff9393; }
 
 .does-not-apply {
-  background-color: white;
-}
+  background-color: white; }
 
 .material-icons {
   vertical-align: middle;
   font-size: inherit !important; }
 
 #course_index_page {
-  text-align: left; 
-}
-
-#course_index_page table {
-  width: 100%;
-  text-align: center; 
-}
-
-#course_index_page table tr:first-child {
-  border-bottom: 1px solid black; 
-}
+  text-align: left; }
+  #course_index_page table {
+    width: 100%;
+    text-align: center; }
+    #course_index_page table tr:first-child {
+      border-bottom: 1px solid black; }
 
 /*# sourceMappingURL=style.css.map */
