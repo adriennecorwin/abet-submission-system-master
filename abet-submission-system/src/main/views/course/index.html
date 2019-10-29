@@ -5,14 +5,29 @@
 		</a>
 	</section>
 	<section class="active_courses">
-		<h2>Active Courses <i class="material-icons">help</i></h2>
+		<h2>Active Courses
+			<span name="activeCourses" id="displayMessage"
+				onclick="progress('These are the courses for the current semester.')">
+				<i class="material-icons">help</i>
+			</span>
+		</h2>
 		<table>
 			<tr>
 				<th>Course</th>
 				<th>Semester</th>
 				<th>Year</th>
-				<th>Artifact Progress <i class="material-icons">help</i></th>
-				<th>Due Date</th>
+				<th>Artifact Progress
+					<span name="artifactProgressMessage" id="displayMessage" onclick="progress('Progress of artifact completion. \n'
+						+ 'An artifact is  considered complete when ... (ADD THIS)')">
+						<i class="material-icons">help</i>
+					</span>
+				</th>
+				<th>Due Date
+					<span name="dueDate" id="displayMessage"
+						onclick="progress('At the date listed, the portfolios will become read only and will no longer be editable.')">
+						<i class="material-icons">help</i>
+					</span>
+				</th>
 				<th></th>
 			</tr>
 			<tr>
@@ -34,14 +49,29 @@
 		</table>
 	</section>
 	<section class="archived_courses">
-		<h2>Archived Courses</h2>
+		<h2>Archived Courses
+			<span name="archivedCourses" id="displayMessage"
+				onclick="progress('These are the courses for past semesters semester. \n They are no longer editable')">
+				<i class="material-icons">help</i>
+			</span>
+		</h2>
 		<table>
 			<tr>
 				<th>Course</th>
 				<th>Semester</th>
 				<th>Year</th>
-				<th>Artifact Progress <i class="material-icons">help</i></th>
-				<th>Due Date</th>
+				<th>Artifact Progress
+					<span name="artifactProgress" id="displayMessage" onclick="progress('Progress of artifact completion. \n'
+					+ 'An artifact is  considered complete when ... (ADD THIS)')">
+						<i class="material-icons">help</i>
+					</span>
+				</th>
+				<th>Due Date
+					<span name="dueDate" id="displayMessage"
+						onclick="progress('At the date listed, the portfolios became read only and were no longer be editable.')">
+						<i class="material-icons">help</i>
+					</span>
+				</th>
 				<th></th>
 			</tr>
 			<tr>
@@ -63,3 +93,8 @@
 		</table>
 	</section>
 </section>
+<script type="text/javascript">
+	function progress(givenMessage) {
+		alert(givenMessage); // displays an informative message to the user relating to the info button they clicked
+	}
+</script>
