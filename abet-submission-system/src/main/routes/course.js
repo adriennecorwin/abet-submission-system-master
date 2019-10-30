@@ -5,9 +5,30 @@ var course_portfolio_lib = require('../lib/course_portfolio')
 var router = express.Router();
 
 const Department = require('../models/Department')
+const CoursePortfolioArtifact = require('../models/CoursePortfolio/Artifact')
+
 const TermType = require('../models/TermType')
 
 const course_manage_page = async (res, course_id) => {
+	const a = await (await CoursePortfolioArtifact.query().select().where("portfolio_slo_id", "=", 1));
+
+	var artifacts = [];
+	for(var i=0; i<a.length; i++){
+		var artifactDict = {};
+		artifactDict['name'] = a[i].name;
+		var e = await (await CoursePortfolioArtifact.query().findById(a[i].id)).$relatedQuery('evaluations')
+		var evaluations = [];
+		for (var j=0; j<e.length; j++){
+			var evaluationDict = {};
+			evaluationDict['index'] = e[j].student_index;
+
+			evaluations.push(evaluationDict);
+		}
+		artifactDict['evaluations'] = evaluations;
+		artifacts.push(artifactDict)
+	}
+	console.log(artifacts);
+
 	let course_info = {
 		student_learning_outcomes: [
 			{
@@ -43,38 +64,11 @@ const course_manage_page = async (res, course_id) => {
 						not: 'n/a'
 					},
 				],
-				artifacts: [
-					{
-						name: 'n/a',
-						evaluations: [
-							{
-								index: 1,
-								evaluation: [
-									{
-										metric: 1,
-										value: 6
-									},
-									{
-										metric: 2,
-										value: 6
-									},
-									{
-										metric: 3,
-										value: 6
-									},
-									{
-										metric: 4,
-										value: 6
-									}
-								]
-							}
-						]
-					}
-				]
+				artifacts: artifacts
 			}
 		]
 	};
-
+	
 	res.render('base_template', {
 		title: 'CS498 Course Portfolio',
 		body: mustache.render('course/manage', course_info)
@@ -92,6 +86,8 @@ const course_new_page = async (res, department = false) => {
 		student_learning_outcomes = await (await Department.query().findById(department))
 			.$relatedQuery('student_learning_outcomes')
 	}
+
+	console.log(student_learning_outcomes);
 
 	res.render('base_template', {
 		title: 'New Course Portfolio',

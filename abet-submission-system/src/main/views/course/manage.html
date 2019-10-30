@@ -41,7 +41,7 @@
 		</table>
 		{{#artifacts}}
 		<div class="container row">
-			<h3>Artifact 1: {{name}}</h3>
+			<h3>Artifact {{index}}: {{name}}</h3>
 			<form id="edit_course_form" target="_self" method="POST">
 				<table>
 					<tr>
@@ -56,17 +56,6 @@
 						<td>{{index}}</td>
 						{{#evaluation}}
 						<td>
-								<!-- <select
-								onchange="this.className=this.options[this.selectedIndex].className"
-								class="exceeds">
-								 <option class="exceeds" value="apple" >Apple</option>
-								<option class="meets"   value="banana" >Banana</option>
-								<option class="partially" value="grape" >Grape</option>
-								<option class="not" value="orange" >Orange</option>
-								<option class="does-not-apply" value="orange">None</option>
-
-
-							</select> -->
 							<select name="student-{{index}}-category-{{metric}}" onchange="this.className=this.options[this.selectedIndex].className" class="exceeds">
 								<option value="6" class="exceeds" value="exceeds">Exceeds</option>
 								<option value="7" class="meets" value="meets">Meets</option>
@@ -95,16 +84,22 @@
 </section>
 
 <script type="text/javascript">
+	function triggerConfirmPopup(select){
+		if (!confirm("REMINDER: Uploaded submissions should have all student identifying information removed from them. Are you sure you want to continue?")) {
+				select.value = "";
+			}
+			$('#selected-file-name')[0].innerHTML = select.value;
+	}
+	function triggerRemindPopup(){
+		alert("REMEMBER TO REMOVE ALL STUDENT IDENTIFYING INFORMATION FROM SUBMISSIONS BEFORE UPLOADING");
+    		$('#student-submission-file').click();
+	}
 	$(document).ready(function(){
 		$("#student-submission-file").on('change',function(){
-			if (!confirm("REMINDER: Uploaded submissions should have all student identifying information removed from them. Are you sure you want to continue?")) {
-				this.value = "";
-			}
-			$('#selected-file-name')[0].innerHTML = this.value;
+			triggerConfirmPopup(this);
 		});
 		$('#file-button').click(function() {
-			alert("REMEMBER TO REMOVE ALL STUDENT IDENTIFYING INFORMATION FROM SUBMISSIONS BEFORE UPLOADING");
-    		$('#student-submission-file').click();
+			triggerRemindPopup()
 		});
 	});
 </script>
