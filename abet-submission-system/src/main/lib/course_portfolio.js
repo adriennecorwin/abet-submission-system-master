@@ -83,38 +83,7 @@ module.exports.calculateArchiveDate = (semester, year) => {
 	}
 	archiveDate = new Date(finalDate.setDate(finalDate.getDate() + (2 * 7))); //final date plus 2 weeks
 	return archiveDate;
-<<<<<<< Updated upstream
 }
-
-// module.exports.calculateArchiveDate = (portfolio) => {
-// 	if (portfolio.year <= 0){
-// 		throw "Invalid portfolio year"
-// 	}
-// 	if(portfolio.semester == "fall"){
-// 		finalDate = new Date(portfolio.year, 12, 12)
-// 	}
-// 	else if(portfolio.semester == "spring"){
-// 		finalDate = new Date(portfolio.year, 5, 5)
-// 	}
-// 	else if(portfolio.semester == "summer 1"){
-// 		finalDate = new Date(portfolio.year, 7, 7)
-// 	}
-// 	else if(portfolio.semester == "summer 2"){
-// 		finalDate = new Date(portfolio.year, 8, 8)
-// 	}
-// 	else if(portfolio.semester == "winter"){
-// 		finalDate = new Date(portfolio.year, 2, 2)
-// 	}
-// 	else{
-// 		throw "Invalid portfolio semester";
-// 	}
-//     if (finalDate instanceof Date){
-//       return new Date(finalDate + 12096e5) //final date plus 2 weeks
-//     }
-//     else{
-//       throw "Not a properly formatted final date";
-// 	} 
-// }
 
 // function to get num students and randomly select indexed
 module.exports.selectStudentIndexes = (numStudents) => {
@@ -138,6 +107,3 @@ module.exports.selectStudentIndexes = (numStudents) => {
 	}
 	return finalStudentIndexes;
 }
-=======
-}
->>>>>>> Stashed changes
