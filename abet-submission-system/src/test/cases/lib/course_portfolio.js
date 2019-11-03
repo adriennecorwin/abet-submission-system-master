@@ -83,3 +83,50 @@ describe('Lib - CoursePortfolio', () => {
 		})
 	})
 })
+describe('selectStudentIndexes', () => {
+
+	it('should return an array with every student index in the list when numStudents < 10', () => {
+		var numStudents = 9;
+		var expected = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+		var actual = course_portfolio.selectStudentIndexes(numStudents);
+		expect(actual).deep.equals(expected);
+	})
+
+	it('should return an array with every student index in the list when numStudents = 10', () => {
+		var numStudents = 10;
+		var expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+		var actual = course_portfolio.selectStudentIndexes(numStudents);
+		expect(actual).deep.equals(expected);
+	})
+
+	it('should return an array with 10 random distinct student indexes in it, when numStudent > 10', () => {
+		const sinon = require('sinon')
+		const sandbox = sinon.createSandbox()
+		var numStudents = 15;
+		var expectedLength = 10; // the minimum number of students that should be evaluated
+		var expected = [1, 2, 4, 5, 7, 8, 10, 11, 13, 14]
+		// stub out math.random
+		const stub = sandbox.stub(Math, 'random')
+		stub.onCall(0).returns(0);
+		stub.onCall(1).returns(0.1);
+		stub.onCall(2).returns(0.2);
+		stub.onCall(3).returns(0.3);
+		stub.onCall(4).returns(0.4);
+		stub.onCall(5).returns(0.4);
+		stub.onCall(6).returns(0.5);
+		stub.onCall(7).returns(0.5);
+		stub.onCall(8).returns(0.6);
+		stub.onCall(9).returns(0.7);
+		stub.onCall(10).returns(0.12);
+		stub.onCall(11).returns(0.11);
+		stub.onCall(12).returns(0.8);
+		stub.onCall(13).returns(0.9);
+		stub.onCall(14).returns(0.10);
+		var actual = course_portfolio.selectStudentIndexes(numStudents);
+		var actualLength = actual.length;
+		expect(actualLength).equals(expectedLength);
+		expect(actual).deep.equals(expected);
+	})
+
+})
+

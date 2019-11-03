@@ -60,25 +60,25 @@ module.exports.get = async (portfolio_id) => {
 	return portfolio
 }
 module.exports.calculateArchiveDate = (semester, year) => {
-	if (year <= 0){
+	if (year <= 0) {
 		throw new Error('Invalid portfolio year');
 	}
-	if(semester == "fall"){
+	if (semester == "fall") {
 		finalDate = new Date(year, 12, 12);
 	}
-	else if(semester == "spring"){
+	else if (semester == "spring") {
 		finalDate = new Date(year, 5, 5);
 	}
-	else if(semester == "summer 1"){
+	else if (semester == "summer 1") {
 		finalDate = new Date(year, 7, 7);
 	}
-	else if(semester == "summer 2"){
+	else if (semester == "summer 2") {
 		finalDate = new Date(year, 8, 8);
 	}
-	else if(semester == "winter"){
+	else if (semester == "winter") {
 		finalDate = new Date(year, 2, 2);
 	}
-	else{
+	else {
 		throw new Error('Invalid portfolio semester');
 	}
 	archiveDate = new Date(finalDate.setDate(finalDate.getDate() + (2 * 7))); //final date plus 2 weeks
@@ -114,3 +114,26 @@ module.exports.calculateArchiveDate = (semester, year) => {
 //       throw "Not a properly formatted final date";
 // 	} 
 // }
+
+// function to get num students and randomly select indexed
+module.exports.selectStudentIndexes = (numStudents) => {
+	var minNumStudents = 10;
+	if (numStudents <= 10) {
+		var studentIndexes = Array(numStudents);
+		for (var i = 0; i < numStudents; i++) {
+			studentIndexes[i] = i + 1;
+		}
+		return studentIndexes;
+	} else {
+		var studentIndexes = Array(minNumStudents);
+		for (var j = 0; j < minNumStudents; j++) {
+			studentIndexes[j] = Math.floor(Math.random() * numStudents) + 1
+		}
+		var finalStudentIndexes = [...new Set(studentIndexes)]; //picks out the unique studentIndex values
+		while (finalStudentIndexes.length < minNumStudents) {
+			finalStudentIndexes.push(Math.floor(Math.random() * numStudents) + 1);
+			finalStudentIndexes = [...new Set(finalStudentIndexes)];
+		}
+	}
+	return finalStudentIndexes;
+}
