@@ -83,6 +83,7 @@ module.exports.calculateArchiveDate = (semester, year) => {
 	}
 	archiveDate = new Date(finalDate.setDate(finalDate.getDate() + (2 * 7))); //final date plus 2 weeks
 	return archiveDate;
+<<<<<<< Updated upstream
 }
 
 // module.exports.calculateArchiveDate = (portfolio) => {
@@ -137,3 +138,6 @@ module.exports.selectStudentIndexes = (numStudents) => {
 	}
 	return finalStudentIndexes;
 }
+=======
+}
+>>>>>>> Stashed changes
