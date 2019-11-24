@@ -104,6 +104,11 @@ const course_new_page = async (res, department = false) => {
 	})
 }
 
+const downloaded_page = async (res, department = false) => {
+	res.render('downloaded_base', {
+	})
+}
+
 /* GET course home page */
 router.route('/')
 	.get(html.auth_wrapper(async (req, res, next) => {
@@ -145,6 +150,11 @@ router.route('/:id')
 		} else {
 			await course_manage_page(res, 499)
 		}
+	}))
+
+router.route('/:id/download')
+	.get(html.auth_wrapper(async (req, res, next) => {
+		await downloaded_page(res)
 	}))
 
 module.exports = router;

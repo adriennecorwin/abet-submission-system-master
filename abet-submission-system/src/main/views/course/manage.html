@@ -56,17 +56,6 @@
 						<td>{{index}}</td>
 						{{#evaluation}}
 						<td>
-								<!-- <select
-								onchange="this.className=this.options[this.selectedIndex].className"
-								class="exceeds">
-								 <option class="exceeds" value="apple" >Apple</option>
-								<option class="meets"   value="banana" >Banana</option>
-								<option class="partially" value="grape" >Grape</option>
-								<option class="not" value="orange" >Orange</option>
-								<option class="does-not-apply" value="orange">None</option>
-
-
-							</select> -->
 							<select name="student-{{index}}-category-{{metric}}" onchange="this.className=this.options[this.selectedIndex].className" class="exceeds">
 								<option value="6" class="exceeds" value="exceeds">Exceeds</option>
 								<option value="7" class="meets" value="meets">Meets</option>
@@ -93,6 +82,7 @@
 		{{/student_learning_outcomes}}
 	</div>
 </section>
+<a href="/course/123/download">download <i class="material-icons">file_download</i></a>
 
 <script type="text/javascript">
 	$(document).ready(function(){

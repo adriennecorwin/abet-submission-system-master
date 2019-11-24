@@ -59,6 +59,7 @@ module.exports.get = async (portfolio_id) => {
 
 	return portfolio
 }
+
 module.exports.calculateArchiveDate = (semester, year) => {
 	if (year <= 0) {
 		throw new Error('Invalid portfolio year');
@@ -106,4 +107,78 @@ module.exports.selectStudentIndexes = (numStudents) => {
 		}
 	}
 	return finalStudentIndexes;
+}
+
+// function to calculate course score as average of given array of slo scores
+// cut off scores at 2 decimal places
+module.exports.calculateCourseScore = (sloScores) => {
+	if(sloScores.length == 0){
+		throw new Error('Invalid slo scores');
+	}
+	var courseScore = 0;
+	for(var i=0; i<sloScores.length; i++){
+		courseScore += sloScores[i]
+	}
+	courseScore = parseFloat((courseScore/sloScores.length).toFixed(2))
+	return courseScore;
+}
+
+//function to calculate artifact score
+//input: array of arrays where each subarray represents a student and each element of the subarray 
+//represents how well they performed in a category of the rubric (4=exceeds, 3=meets, 2=partially meets, 1=does not meet, 0=does not apply)
+//output: array of percentages, representing percentage of students who met or exceeded at each category of the rubric
+//if category does not apply, the score for that category is -1
+// cut off scores at 2 decimal places
+module.exports.calculateArtifactScore = (studentEvals) => {
+	//make sure there are evaluations for the calculation
+	if(studentEvals.length == 0){
+		throw new Error('Invalid evaluations');
+	}
+
+	//make sure every student has the same number of categories in their evaluations
+	numRubricCategories = studentEvals[0].length
+	for(var i=1; i<studentEvals.length; i++){
+		if(studentEvals[i].length != numRubricCategories){
+			throw new Error('Invalid evaluations');
+		}
+	}
+
+	//ensure that if one student has does not apply in a category, all students have does not apply in that category as well
+	dnaIndexes = []
+	for(var i=0; i<numRubricCategories; i++){
+		if(studentEvals[0][i] == 0){
+			dnaIndexes.push(i);
+		}
+	}
+	for(var i=0; i<studentEvals.length; i++){
+		for(var j=0; j<dnaIndexes.length; j++){
+			if(studentEvals[i][dnaIndexes[j]] != 0){
+				throw new Error('Invalid evaluations');
+			}
+		}
+	}
+	var scores = [];
+	for(var i=0; i<numRubricCategories; i++){
+		if(dnaIndexes.includes(i)){
+			scores.push(-1);
+		}
+		else{
+			scores.push(0);
+		}
+	}
+	for(var i=0; i<studentEvals.length; i++){
+		for(var j=0; j<studentEvals[i].length; j++){
+			if(!dnaIndexes.includes(j)){
+				if(studentEvals[i][j] >= 3){
+					scores[j] += 1;
+				}
+			}
+		}
+	}
+	for(var i=0; i<numRubricCategories; i++){
+		if(!dnaIndexes.includes(i)){
+			scores[i] = parseFloat(((scores[i]/studentEvals.length) * 100).toFixed(2));
+		}
+	}
+	return scores;
 }

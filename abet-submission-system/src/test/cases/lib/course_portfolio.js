@@ -130,3 +130,99 @@ describe('selectStudentIndexes', () => {
 
 })
 
+describe('calculate course score', () => {
+
+	it('course score calculation integers', () => {
+		var input = [90, 80, 70, 60];
+		var expected = 75.00;
+		var actual = course_portfolio.calculateCourseScore(input);
+		expect(actual).deep.equals(expected);
+	})
+
+	it('course score calculation floats', () => {
+		var input = [90.9, 80.8, 70.7, 60.6];
+		var expected = 75.75;
+		var actual = course_portfolio.calculateCourseScore(input);
+		expect(actual).equals(expected);
+	})
+
+	it('course score calculation 1 score', () => {
+		var input = [88];
+		var expected = 88.00;
+		var actual = course_portfolio.calculateCourseScore(input);
+		expect(actual).equals(expected);
+	})
+
+	it('course score calculation round to 2 decimal places', () => {
+		var input = [22.33, 64.5];
+		var expected = 43.41;
+		var actual = course_portfolio.calculateCourseScore(input);
+		expect(actual).equals(expected);
+	})
+
+	it('empty input', () => {
+		var input = [];
+		const test_function = () => {
+			course_portfolio.calculateCourseScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Invalid slo scores')
+	})
+
+})
+
+describe('calculate artifact score', () => {
+
+	it('artifact score calculation (no does not apply)', () => {
+		var input = [[4, 3, 3, 4], [2, 3, 3, 1], [1, 2, 2, 1], [3, 4, 4, 3]];
+		var expected = [50.00, 75.00, 75.00, 50.00];
+		var actual = course_portfolio.calculateArtifactScore(input);
+		expect(actual).deep.equals(expected);
+	})
+
+	it('artifact score calculation round to 2 decimal places', () => {
+		var input = [[4, 4, 3, 1], [3, 4, 2, 1], [2, 2, 1, 1]];
+		var expected = [66.67, 66.67, 33.33, 0];
+		var actual = course_portfolio.calculateArtifactScore(input);
+		expect(actual).deep.equals(expected);
+	})
+
+	it('1 does not apply', () => {
+		var input = [[4, 0, 3, 4], [2, 0, 3, 1], [1, 0, 2, 1], [3, 0, 4, 3]];
+		var expected = [50.00, -1, 75.00, 50.00];
+		var actual = course_portfolio.calculateArtifactScore(input);
+		expect(actual).deep.equals(expected);
+	})
+
+	it('2 does not apply', () => {
+		var input = [[4, 0, 0, 4], [2, 0, 0, 1], [1, 0, 0, 1], [3, 0, 0, 3]];
+		var expected = [50.00, -1, -1, 50.00];
+		var actual = course_portfolio.calculateArtifactScore(input);
+		expect(actual).deep.equals(expected);
+	})
+
+	it('empty input', () => {
+		var input = [];
+		const test_function = () => {
+			course_portfolio.calculateArtifactScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Invalid evaluations')
+	})
+
+	it('different lengths', () => {
+		var input = [[4, 4, 3, 1], [3, 4, 2], [2, 2, 1]];
+		const test_function = () => {
+			course_portfolio.calculateArtifactScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Invalid evaluations')
+	})
+
+	it('different does not apply', () => {
+		var input = [[4, 0, 3, 1], [3, 4, 2], [2, 0, 1]];
+		const test_function = () => {
+			course_portfolio.calculateArtifactScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Invalid evaluations')
+	})
+
+})
+
