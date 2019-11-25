@@ -184,37 +184,25 @@ module.exports.calculateArtifactScore = (studentEvals) => {
 }
 
 //function to calculate slo score
-//input: array of arrays where each subarray represents an artifact and each element of the subarray 
-//represents the overall score for each category of the rubric for that artifact
-//output: array of integers representing the avergae score for each category for the provided artifacts
+//input: arrayof artifact scores
+//output:avergae of the inputted artifact scores
 module.exports.calculateSLOScore = (artifactScores) => {
-	//make sure there are evaluations for the calculation
-	if (artifactScores.length == 0) {
-		throw new Error('Invalid artifacts');
+	// make sure there are evaluations for the calculation
+	if (artifactScores.length === 0) {
+		throw new Error('No artifacts to evaluate');
 	}
 
-	// make sure that all of the artifact scores have the same length
-	for(var k = 0; k < artifactScores.length - 1; k++) {
-		if(artifactScores[k].length !== artifactScores[k+1].length) {
-			throw new Error('Artifact scores have different length');
-		}
+	// makes sure there are exactly three artifact scores
+	if(artifactScores.length !== 3) {
+		throw new Error('Incorrect number of artifacts');
 	}
 
-	var sloScore = [];
-	var currentCategoryScore = 0;
-	var count = 0;
+	var sloScore = 0;
 
-	// compute the avergae for each category of the given artifacts
-	for (var i = 0; i < artifactScores[0].length; i++) {
-		artifactScores.forEach(artifact => {
-			currentCategoryScore += artifact[i];
-			count++;
-		});
-		currentCategoryScore = currentCategoryScore / count;
-		sloScore.push(currentCategoryScore);
-		count = 0;
-		currentCategoryScore = 0;
-	}
-
+	artifactScores.forEach(artifact => {
+		sloScore += artifact;
+	});
+	
+	sloScore = sloScore/artifactScores.length;
 	return sloScore;
 }
