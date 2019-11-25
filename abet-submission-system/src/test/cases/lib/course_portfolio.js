@@ -174,30 +174,30 @@ describe('calculate artifact score', () => {
 
 	it('artifact score calculation (no does not apply)', () => {
 		var input = [[4, 3, 3, 4], [2, 3, 3, 1], [1, 2, 2, 1], [3, 4, 4, 3]];
-		var expected = [50.00, 75.00, 75.00, 50.00];
+		var expected = 62.50;
 		var actual = course_portfolio.calculateArtifactScore(input);
-		expect(actual).deep.equals(expected);
+		expect(actual).equals(expected);
 	})
 
 	it('artifact score calculation round to 2 decimal places', () => {
 		var input = [[4, 4, 3, 1], [3, 4, 2, 1], [2, 2, 1, 1]];
-		var expected = [66.67, 66.67, 33.33, 0];
+		var expected = 41.67;
 		var actual = course_portfolio.calculateArtifactScore(input);
-		expect(actual).deep.equals(expected);
+		expect(actual).equals(expected);
 	})
 
 	it('1 does not apply', () => {
 		var input = [[4, 0, 3, 4], [2, 0, 3, 1], [1, 0, 2, 1], [3, 0, 4, 3]];
-		var expected = [50.00, -1, 75.00, 50.00];
+		var expected = 58.33;
 		var actual = course_portfolio.calculateArtifactScore(input);
-		expect(actual).deep.equals(expected);
+		expect(actual).equals(expected);
 	})
 
 	it('2 does not apply', () => {
 		var input = [[4, 0, 0, 4], [2, 0, 0, 1], [1, 0, 0, 1], [3, 0, 0, 3]];
-		var expected = [50.00, -1, -1, 50.00];
+		var expected = 50.00;
 		var actual = course_portfolio.calculateArtifactScore(input);
-		expect(actual).deep.equals(expected);
+		expect(actual).equals(expected);
 	})
 
 	it('empty input', () => {
