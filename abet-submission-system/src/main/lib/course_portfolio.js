@@ -116,8 +116,8 @@ module.exports.calculateCourseScore = (sloScores) => {
 		throw new Error('Invalid slo scores');
 	}
 	var courseScore = 0;
-	for (var i = 0; i < sloScores.length; i++) {
-		courseScore += sloScores[i]
+	for(var i=0; i<sloScores.length; i++){
+		courseScore += sloScores[i];
 	}
 	courseScore = parseFloat((courseScore / sloScores.length).toFixed(2))
 	return courseScore;
@@ -180,7 +180,17 @@ module.exports.calculateArtifactScore = (studentEvals) => {
 			scores[i] = parseFloat(((scores[i] / studentEvals.length) * 100).toFixed(2));
 		}
 	}
-	return scores;
+
+	var sumScores = 0;
+	var numScoredCategories = 0;
+	for(var i=0; i<numRubricCategories; i++){
+		if(scores[i] != -1){
+			numScoredCategories += 1;
+			sumScores += scores[i];
+		}
+	}
+
+	return parseFloat((sumScores/numScoredCategories).toFixed(2));
 }
 
 //function to calculate slo score
