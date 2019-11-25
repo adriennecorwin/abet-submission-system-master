@@ -4,6 +4,8 @@ const sinon = require('sinon')
 
 const sandbox = sinon.createSandbox();
 
+// These tests were given by 
+// https://uk.instructure.com/courses/1957194/pages/final-project-phase-2-example
 describe('Lib - User', () => {
 
     describe('is_whitelisted', () => {

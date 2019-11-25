@@ -1,5 +1,7 @@
 const User = require('../models/User') // relative path to the User model from user.js
 
+// This function was given by 
+// https://uk.instructure.com/courses/1957194/pages/final-project-phase-2-example
 const is_whitelisted = async (linkblue_username) => {
     // try to pull the user from the user table using the linkblue_username
     const user = await User.query()
