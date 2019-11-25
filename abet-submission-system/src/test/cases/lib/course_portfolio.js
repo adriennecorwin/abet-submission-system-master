@@ -226,3 +226,29 @@ describe('calculate artifact score', () => {
 
 })
 
+describe('calculate slo score', () => {
+
+	it('has an empty array of artifact scores', () => {
+		var input = [];
+		const test_function = () => {
+			course_portfolio.calculateSLOScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Invalid artifacts')
+	})
+
+	it('has artifact scores of different lengths', () => {
+		var input = [[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3]];
+		const test_function = () => {
+			course_portfolio.calculateSLOScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Artifact scores have different length')
+	})
+
+	it('calculates artifact scores', () => {
+		var input = [[50, 20, 40, 75], [20, 30, 60, 75], [20, 70, 80, 90]];
+		var expected = [30, 40, 60, 80];
+		var actual = course_portfolio.calculateSLOScore(input);
+		expect(actual).deep.equals(expected);
+	})
+})
+

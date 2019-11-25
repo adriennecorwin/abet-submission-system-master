@@ -112,14 +112,14 @@ module.exports.selectStudentIndexes = (numStudents) => {
 // function to calculate course score as average of given array of slo scores
 // cut off scores at 2 decimal places
 module.exports.calculateCourseScore = (sloScores) => {
-	if(sloScores.length == 0){
+	if (sloScores.length == 0) {
 		throw new Error('Invalid slo scores');
 	}
 	var courseScore = 0;
-	for(var i=0; i<sloScores.length; i++){
+	for (var i = 0; i < sloScores.length; i++) {
 		courseScore += sloScores[i]
 	}
-	courseScore = parseFloat((courseScore/sloScores.length).toFixed(2))
+	courseScore = parseFloat((courseScore / sloScores.length).toFixed(2))
 	return courseScore;
 }
 
@@ -131,54 +131,90 @@ module.exports.calculateCourseScore = (sloScores) => {
 // cut off scores at 2 decimal places
 module.exports.calculateArtifactScore = (studentEvals) => {
 	//make sure there are evaluations for the calculation
-	if(studentEvals.length == 0){
+	if (studentEvals.length == 0) {
 		throw new Error('Invalid evaluations');
 	}
 
 	//make sure every student has the same number of categories in their evaluations
 	numRubricCategories = studentEvals[0].length
-	for(var i=1; i<studentEvals.length; i++){
-		if(studentEvals[i].length != numRubricCategories){
+	for (var i = 1; i < studentEvals.length; i++) {
+		if (studentEvals[i].length != numRubricCategories) {
 			throw new Error('Invalid evaluations');
 		}
 	}
 
 	//ensure that if one student has does not apply in a category, all students have does not apply in that category as well
 	dnaIndexes = []
-	for(var i=0; i<numRubricCategories; i++){
-		if(studentEvals[0][i] == 0){
+	for (var i = 0; i < numRubricCategories; i++) {
+		if (studentEvals[0][i] == 0) {
 			dnaIndexes.push(i);
 		}
 	}
-	for(var i=0; i<studentEvals.length; i++){
-		for(var j=0; j<dnaIndexes.length; j++){
-			if(studentEvals[i][dnaIndexes[j]] != 0){
+	for (var i = 0; i < studentEvals.length; i++) {
+		for (var j = 0; j < dnaIndexes.length; j++) {
+			if (studentEvals[i][dnaIndexes[j]] != 0) {
 				throw new Error('Invalid evaluations');
 			}
 		}
 	}
 	var scores = [];
-	for(var i=0; i<numRubricCategories; i++){
-		if(dnaIndexes.includes(i)){
+	for (var i = 0; i < numRubricCategories; i++) {
+		if (dnaIndexes.includes(i)) {
 			scores.push(-1);
 		}
-		else{
+		else {
 			scores.push(0);
 		}
 	}
-	for(var i=0; i<studentEvals.length; i++){
-		for(var j=0; j<studentEvals[i].length; j++){
-			if(!dnaIndexes.includes(j)){
-				if(studentEvals[i][j] >= 3){
+	for (var i = 0; i < studentEvals.length; i++) {
+		for (var j = 0; j < studentEvals[i].length; j++) {
+			if (!dnaIndexes.includes(j)) {
+				if (studentEvals[i][j] >= 3) {
 					scores[j] += 1;
 				}
 			}
 		}
 	}
-	for(var i=0; i<numRubricCategories; i++){
-		if(!dnaIndexes.includes(i)){
-			scores[i] = parseFloat(((scores[i]/studentEvals.length) * 100).toFixed(2));
+	for (var i = 0; i < numRubricCategories; i++) {
+		if (!dnaIndexes.includes(i)) {
+			scores[i] = parseFloat(((scores[i] / studentEvals.length) * 100).toFixed(2));
 		}
 	}
 	return scores;
+}
+
+//function to calculate slo score
+//input: array of arrays where each subarray represents an artifact and each element of the subarray 
+//represents the overall score for each category of the rubric for that artifact
+//output: array of integers representing the avergae score for each category for the provided artifacts
+module.exports.calculateSLOScore = (artifactScores) => {
+	//make sure there are evaluations for the calculation
+	if (artifactScores.length == 0) {
+		throw new Error('Invalid artifacts');
+	}
+
+	// make sure that all of the artifact scores have the same length
+	for(var k = 0; k < artifactScores.length - 1; k++) {
+		if(artifactScores[k].length !== artifactScores[k+1].length) {
+			throw new Error('Artifact scores have different length');
+		}
+	}
+
+	var sloScore = [];
+	var currentCategoryScore = 0;
+	var count = 0;
+
+	// compute the avergae for each category of the given artifacts
+	for (var i = 0; i < artifactScores[0].length; i++) {
+		artifactScores.forEach(artifact => {
+			currentCategoryScore += artifact[i];
+			count++;
+		});
+		currentCategoryScore = currentCategoryScore / count;
+		sloScore.push(currentCategoryScore);
+		count = 0;
+		currentCategoryScore = 0;
+	}
+
+	return sloScore;
 }

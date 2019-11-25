@@ -56,7 +56,8 @@
 						<td>{{index}}</td>
 						{{#evaluation}}
 						<td>
-							<select name="student-{{index}}-category-{{metric}}" onchange="this.className=this.options[this.selectedIndex].className" class="exceeds">
+							<select name="student-{{index}}-category-{{metric}}"
+								onchange="this.className=this.options[this.selectedIndex].className" class="exceeds">
 								<option value="6" class="exceeds" value="exceeds">Exceeds</option>
 								<option value="7" class="meets" value="meets">Meets</option>
 								<option value="8" class="partially" value="partially">Partially</option>
@@ -67,7 +68,8 @@
 						</td>
 						{{/evaluation}}
 						<td>
-							<input name="student-1-submission" type="file" id="student-submission-file" style="display:none;"></input>
+							<input name="student-1-submission" type="file" id="student-submission-file"
+								style="display:none;"></input>
 							<input type="button" id="file-button" value="Upload"></input>
 							attach <i class="material-icons">attachment</i>
 							<p id="selected-file-name"></p>
@@ -81,20 +83,25 @@
 		{{/artifacts}}
 		{{/student_learning_outcomes}}
 	</div>
+	<div align="left">
+		<a href="/course/123/download">download <i class="material-icons">file_download</i></a>
+		<br />
+		<a href="/course/123/artifact/new">add new artifact <i class="material-icons">add_circle</i></a>
+	</div>
 </section>
-<a href="/course/123/download">download <i class="material-icons">file_download</i></a>
+
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#student-submission-file").on('change',function(){
+	$(document).ready(function () {
+		$("#student-submission-file").on('change', function () {
 			if (!confirm("REMINDER: Uploaded submissions should have all student identifying information removed from them. Are you sure you want to continue?")) {
 				this.value = "";
 			}
 			$('#selected-file-name')[0].innerHTML = this.value;
 		});
-		$('#file-button').click(function() {
+		$('#file-button').click(function () {
 			alert("REMEMBER TO REMOVE ALL STUDENT IDENTIFYING INFORMATION FROM SUBMISSIONS BEFORE UPLOADING");
-    		$('#student-submission-file').click();
+			$('#student-submission-file').click();
 		});
 	});
 </script>
