@@ -168,6 +168,30 @@ describe('calculate course score', () => {
 		expect(test_function).to.throw(Error, 'Invalid slo scores')
 	})
 
+	it('to many scores', () => {
+		var input = [100, 100, 100, 100, 100, 100, 100];
+		const test_function = () => {
+			course_portfolio.calculateCourseScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Invalid slo scores')
+	})
+
+	it('string instead of number', () => {
+		var input = [100, 100, 100, 100, "100"];
+		const test_function = () => {
+			course_portfolio.calculateCourseScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Invalid slo scores')
+	})
+
+	it('all strings', () => {
+		var input = ["100", "100", "100", "100", "100"];
+		const test_function = () => {
+			course_portfolio.calculateCourseScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Invalid slo scores')
+	})
+
 })
 
 describe('calculate artifact score', () => {
@@ -218,6 +242,22 @@ describe('calculate artifact score', () => {
 
 	it('different does not apply', () => {
 		var input = [[4, 0, 3, 1], [3, 4, 2], [2, 0, 1]];
+		const test_function = () => {
+			course_portfolio.calculateArtifactScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Invalid evaluations')
+	})
+
+	it('string instead of number', () => {
+		var input = [[4, 0, 3, 1], [3, "4", 2], [2, 0, 1]];
+		const test_function = () => {
+			course_portfolio.calculateArtifactScore(input)
+		}
+		expect(test_function).to.throw(Error, 'Invalid evaluations')
+	})
+
+	it('all strings', () => {
+		var input = [["4", "0", "3", "1"], ["3", "4", "2"], ["2", "0", "1"]];
 		const test_function = () => {
 			course_portfolio.calculateArtifactScore(input)
 		}

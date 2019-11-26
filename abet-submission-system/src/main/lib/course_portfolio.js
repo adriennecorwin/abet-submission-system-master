@@ -115,6 +115,14 @@ module.exports.calculateCourseScore = (sloScores) => {
 	if (sloScores.length == 0) {
 		throw new Error('Invalid slo scores');
 	}
+	if (sloScores.length > 6) {
+		throw new Error('Invalid slo scores');
+	}
+	for(var i=0; i<sloScores.length; i++){
+		if(typeof sloScores[i] != 'number'){
+			throw new Error('Invalid slo scores');
+		}
+	}
 	var courseScore = 0;
 	for(var i=0; i<sloScores.length; i++){
 		courseScore += sloScores[i];
@@ -134,7 +142,6 @@ module.exports.calculateArtifactScore = (studentEvals) => {
 	if (studentEvals.length == 0) {
 		throw new Error('Invalid evaluations');
 	}
-
 	//make sure every student has the same number of categories in their evaluations
 	numRubricCategories = studentEvals[0].length
 	for (var i = 1; i < studentEvals.length; i++) {
@@ -157,6 +164,15 @@ module.exports.calculateArtifactScore = (studentEvals) => {
 			}
 		}
 	}
+
+	for(var i=0; i<studentEvals.length; i++){
+		for(var j=0; j<numRubricCategories; j++){
+			if(typeof studentEvals[i][j] != 'number'){
+				throw new Error('Invalid slo scores');
+			}
+		}
+	}
+
 	var scores = [];
 	for (var i = 0; i < numRubricCategories; i++) {
 		if (dnaIndexes.includes(i)) {
