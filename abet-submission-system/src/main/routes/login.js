@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
 })
 
 /* POST login page */
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
 	// hard coded username and password
 	if (req.body.username === 'user' && req.body.password === 'password' && await user_lib.is_whitelisted(req.body.username)) {
 		res.redirect(302, '/course/')

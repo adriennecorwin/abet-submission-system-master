@@ -15,3 +15,5 @@ const is_whitelisted = async (linkblue_username) => {
         return false;
     }
 }
+
+module.exports.is_whitelisted = is_whitelisted
