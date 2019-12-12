@@ -1,6 +1,6 @@
 # ABET Submission System
 
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=abet-submission-system-master&metric=bugs)](https://sonarcloud.io/dashboard?id=abet-submission-system-master)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=abet-submission-system-master&metric=bugs)](https://sonarcloud.io/dashboard?id=adriennecorwin_abet-submission-system-master)
 
 This repository is being developed by Ethan Toney for use by the Computer Science department at the University of Kentucky. Only students of Ethan Toney's Fall 2019 CS498 course have permission to download and edit this repository for the purpose of accomplishing the final project.
 
