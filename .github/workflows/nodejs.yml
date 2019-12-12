@@ -8,6 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: harmon758/postgresql-action@v1
+      with:
+        postgresql version: '11'  # See https://hub.docker.com/_/postgres for available versions
+        postgresql db: 'abet_system_test'
+        postgresql user: 'postgres'
+        postgresql password: 'ukySb3rt*&87'
+    
     - name: Checking out most recent version of code
       uses: actions/checkout@v1
       
@@ -21,10 +28,3 @@ jobs:
       
     - name: Unit tests
       run: npm test
-      
-    - uses: harmon758/postgresql-action@v1
-      with:
-        postgresql version: '11'  # See https://hub.docker.com/_/postgres for available versions
-        postgresql db: 'abet_system_test'
-        user: 'postgres'
-        password: 'ukySb3rt*&87'
