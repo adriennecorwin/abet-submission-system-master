@@ -1,6 +1,6 @@
 # LWJGL Shader Manager
-
 [![Sonarcloud Status] (https://sonarcloud.io/api/project_badges/measure?project=lwjgl-shader-manager&metric=bugs)]
+(https://sonarcloud.io/dashboard?id=lwjgl-shader-manager)
 
 # ABET Submission System
 
