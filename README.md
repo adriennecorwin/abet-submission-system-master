@@ -1,8 +1,10 @@
+# LWJGL Shader Manager
+
+[![Sonarcloud Status] (https://sonarcloud.io/api/project_badges/measure?project=lwjgl-shader-manager&metric=bugs)]
+
 # ABET Submission System
 
 This repository is being developed by Ethan Toney for use by the Computer Science department at the University of Kentucky. Only students of Ethan Toney's Fall 2019 CS498 course have permission to download and edit this repository for the purpose of accomplishing the final project.
-
-[![Sonarcluod Status] (https://sonarcloud.io/api/project_badges/measure?project=lwjgl-shsader-manager&metric=bugs)]
 
 ## Technologies/Terms
 
