@@ -162,6 +162,8 @@ router.route('/:id/download')
 		await downloaded_page(res)
 	}))
 
+
+// new artifact route
 router.route('/:id/artifact/new')
 	.get(html.auth_wrapper(async (req, res, next) => {
 		await new_artifact_page(res)
