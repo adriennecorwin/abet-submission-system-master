@@ -3,7 +3,8 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'abet_system_dev',
-      password: 'OPr5qR8HR'
+      user: 'postgres',
+      password: 'ukySb3rt*&87'
     },
     migrations: {
       directory: './src/main/migrations'
@@ -20,7 +21,9 @@ module.exports = {
   test: {
     client: 'postgresql',
     connection: {
-      database: 'abet_system_dev'
+      database: 'abet_system_dev',
+      user: 'postgres',
+      password: 'ukySb3rt*&87'
     },
     migrations: {
       directory: './src/main/migrations'
@@ -37,7 +40,9 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: 'abet_system'
+      database: 'abet_system',
+      user: 'postgres',
+      password: 'ukySb3rt*&87'
     },
     migrations: {
       directory: './src/main/migrations'
